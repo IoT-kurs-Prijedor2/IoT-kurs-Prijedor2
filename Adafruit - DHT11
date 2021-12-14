@@ -92,7 +92,7 @@ void callback(char* topic, byte* message, unsigned int length) {
   Serial.println();
 
   // Ako primljena poruka ima topic "onoffbutton", provjeri da li poruka glasi "ON" ili "OFF". 
-  if (String(topic) == "mrakadol/feeds/onoffbutton") {
+  if (String(topic) == "IoTkursPrijedor2/feeds/dht11") {
     Serial.print("Mijenjam stanje led-a u ");
     if(newMessage == "ON"){
       Serial.println("ON");
@@ -166,7 +166,7 @@ void loop() {
     dtostrf(humidity, 1, 2, humString);
     Serial.print("Humidity: ");
     Serial.println(humString);
-    client.publish("mrakadol/feeds/photocell", humString);    //Adafruit IO zahtjeva ovaj format topic-a: {your Adafruit IO username}/feeds/{feed key}
+    client.publish("IoTkursPrijedor2/feeds/humidity", humString);    //Adafruit IO zahtjeva ovaj format topic-a: {your Adafruit IO username}/feeds/{feed key}
     */
   }
 }
