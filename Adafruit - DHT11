@@ -18,8 +18,8 @@ const char* mqtt_server = "io.adafruit.com";
 
 //Dodati kredencijale sa kojima smo se registrovali na AdafruitIO:
 #define mqtt_user "IoTkursPrijedor2"
-#define outTopic  "IoTkursPrijedor2/feeds/dht11"
-#define mqtt_key  "aio_gVLU11aOUu8scdmBZgSQo429h6F1"
+//#define outTopic  "IoTkursPrijedor2/feeds/dht11"
+#define mqtt_key  "aio_wuzI94mq2GxsUoQqefJCBW9amV9C"
 
 //DHT11 senzor:
 #define DHTPIN 19
@@ -42,7 +42,7 @@ float temperature = 0;
 float humidity = 0;
 
 // Varijabla za LED Pin:
-const int ledPin = 16;
+const int ledPin = 23;
 
 
 void setup() {
@@ -92,7 +92,7 @@ void callback(char* topic, byte* message, unsigned int length) {
   Serial.println();
 
   // Ako primljena poruka ima topic "onoffbutton", provjeri da li poruka glasi "ON" ili "OFF". 
-  if (String(topic) == "IoTkursPrijedor2/feeds/dht11") {
+  if (String(topic) == "IoTkursPrijedor2/feeds/button") {
     Serial.print("Mijenjam stanje led-a u ");
     if(newMessage == "ON"){
       Serial.println("ON");
@@ -119,7 +119,7 @@ void reconnect() {
     if (client.connect(clientId.c_str(),mqtt_user, mqtt_key)) {
       Serial.println("connected");
       // Subscribe
-      client.subscribe("IoTkursPrijedor2/feeds/dht11");           //Ovdje obavezno ubaciti topic za subscribe
+      client.subscribe("IoTkursPrijedor2/feeds/button");           //Ovdje obavezno ubaciti topic za subscribe
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
@@ -143,9 +143,9 @@ void loop() {
     
     //Očitaj podatke sa senzora:
     //humidity = dht.readHumidity();
-    humidity = 20;      //samo za test, bez senzora
+    humidity = dht.readHumidity();;      //samo za test, bez senzora
     //temperature = dht.readTemperature();
-    temperature = 10;   //samo za test, bez senzora
+    temperature = dht.readTemperature();;   //samo za test, bez senzora
     
     // Check if any reads failed and exit early (to try again).
     if (isnan(humidity) || isnan(temperature)) {
@@ -160,13 +160,13 @@ void loop() {
     Serial.println(tempString);
     client.publish("IoTkursPrijedor2/feeds/dht11", tempString);   //Adafruit IO zahtjeva ovaj format topic-a: {your Adafruit IO username}/feeds/{feed key}
 
-    /*
+    
     // Convert the value to a char array
     char humString[8];
     dtostrf(humidity, 1, 2, humString);
     Serial.print("Humidity: ");
     Serial.println(humString);
     client.publish("IoTkursPrijedor2/feeds/humidity", humString);    //Adafruit IO zahtjeva ovaj format topic-a: {your Adafruit IO username}/feeds/{feed key}
-    */
+    
   }
 }
