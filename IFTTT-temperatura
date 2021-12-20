@@ -13,7 +13,7 @@ const char* password = "preda2020";
 
 // Domain Name with full URL Path for HTTP POST Request
 // REPLACE WITH YOUR EVENT NAME AND API KEY - open the documentation: https://ifttt.com/maker_webhooks
-const char* serverName = "https://maker.ifttt.com/trigger/temperatura/with/key/czNfrUpMkzxQYOB_N2tzFc";
+const char* serverName = "https://maker.ifttt.com/trigger/temperatura/with/key/cvZ3DZnj6xl6EdVGKU9yN";
 
 float last_state=0;
 
@@ -83,7 +83,7 @@ void loop() {
   delay(2000);
 
 
-if(t>28 && last_state<28)
+if(h>80 && last_state<80)
 {
   
       if(WiFi.status()== WL_CONNECTED){
@@ -109,5 +109,5 @@ if(t>28 && last_state<28)
       Serial.println("WiFi Disconnected");
     }
   }
-  last_state = t;    
+  last_state = h;    
 }
