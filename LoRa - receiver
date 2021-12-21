@@ -16,8 +16,6 @@
 //915E6 for North America
 #define BAND 866E6
 
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RST);
-
 String LoRaData;
 
 void setup() { 
