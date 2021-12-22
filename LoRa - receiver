@@ -4,12 +4,12 @@
 
 
 //define the pins used by the LoRa transceiver module
-#define SCK 5
+#define SCK 18
 #define MISO 19
-#define MOSI 27
-#define SS 18
+#define MOSI 23
+#define SS 5
 #define RST 14
-#define DIO0 26
+#define DIO0 2
 
 //433E6 for Asia
 //866E6 for Europe
